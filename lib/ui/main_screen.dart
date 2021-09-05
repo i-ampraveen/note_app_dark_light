@@ -20,6 +20,7 @@ class _MainScreenState extends State<MainScreen> {
         elevation: 0,
         title: titleText,
         backwardsCompatibility: false,
+        automaticallyImplyLeading: false,
         backgroundColor: Colors.white.withOpacity(0.4),
       ),
       floatingActionButton: Container(
@@ -40,10 +41,16 @@ class _MainScreenState extends State<MainScreen> {
       ),
       body: Container(
         color: Colors.white.withOpacity(0.4),
-        child: Column(
-          children: [
-            Text(widget.heading)
-          ],
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(18, 18, 0, 0),
+          child: Column(
+            children: [
+              Text(
+                widget.heading,
+              style: hListTextStyle,
+              ),
+            ],
+          ),
         ),
       ),
     );

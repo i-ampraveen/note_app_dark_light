@@ -66,7 +66,7 @@ class HeaderBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextField(
       controller: textEditingController,
-      style: hTextStyle,
+      style: hEditPageTextStyle,
       maxLines: 1,
       cursorColor: Colors.black,
       textCapitalization: TextCapitalization.words,

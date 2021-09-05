@@ -16,8 +16,8 @@ class _AddingNotesState extends State<AddingNotes> {
 
   @override
   void dispose() {
-    bodyController.dispose();
-    headerController.dispose();
+    //bodyController.dispose();
+    //headerController.dispose();
     super.dispose();
   }
 

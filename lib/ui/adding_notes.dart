@@ -2,12 +2,25 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:note_taking_app/constants/buttons_and_icons_misc(classes).dart';
 
+import 'main_screen.dart';
+
+final bodyController = TextEditingController();
+final headerController = TextEditingController();
+
 class AddingNotes extends StatefulWidget {
   @override
   _AddingNotesState createState() => _AddingNotesState();
 }
 
 class _AddingNotesState extends State<AddingNotes> {
+
+  @override
+  void dispose() {
+    bodyController.dispose();
+    headerController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,19 +36,22 @@ class _AddingNotesState extends State<AddingNotes> {
         actions: <Widget>[
           ActionsIconButton(
             icon: Icon(undo, color: black),
-            callBack: (){
+            callBack: () {
               debugPrint('undo tapped');
-          },),
+            },
+          ),
           ActionsIconButton(
             icon: Icon(redo, color: black),
-            callBack: (){
+            callBack: () {
               debugPrint('redo tapped');
             },
           ),
           ActionsIconButton(
             icon: Icon(save, color: black),
-            callBack: (){
-              debugPrint('save tapped');
+            callBack: () {
+              debugPrint(bodyController.text);
+              debugPrint(headerController.text);
+              getHeaderDataToMainScreen(context);
             },
           )
         ],
@@ -46,10 +62,16 @@ class _AddingNotesState extends State<AddingNotes> {
           padding: const EdgeInsets.all(13.0),
           child: Column(
             children: [
-              HeaderBody(),
-              SizedBox(height: 32.0,),
+              HeaderBody(
+                textEditingController: headerController,
+              ),
+              SizedBox(
+                height: 32.0,
+              ),
               Expanded(
-                  child: NotesBody(),
+                child: NotesBody(
+                  textEditingController: bodyController,
+                ),
               ),
             ],
           ),
@@ -57,4 +79,14 @@ class _AddingNotesState extends State<AddingNotes> {
       ),
     );
   }
+}
+
+getHeaderDataToMainScreen(BuildContext context){
+  Navigator.push(context,
+      MaterialPageRoute(
+        builder: (context) => MainScreen(
+          heading : headerController.text,
+        )
+      )
+  );
 }

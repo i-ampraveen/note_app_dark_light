@@ -4,11 +4,15 @@ import 'package:note_taking_app/constants/text_and_decorations(methods).dart';
 import 'package:note_taking_app/ui/adding_notes.dart';
 
 class MainScreen extends StatefulWidget {
+  final heading;
+  MainScreen({this.heading = 'default data'});
+
   @override
   _MainScreenState createState() => _MainScreenState();
 }
 
 class _MainScreenState extends State<MainScreen> {
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,6 +40,11 @@ class _MainScreenState extends State<MainScreen> {
       ),
       body: Container(
         color: Colors.white.withOpacity(0.4),
+        child: Column(
+          children: [
+            Text(widget.heading)
+          ],
+        ),
       ),
     );
   }

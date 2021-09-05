@@ -38,37 +38,39 @@ class ActionsIconButton extends StatelessWidget {
 }
 
 class NotesBody extends StatelessWidget {
-  //const NotesBody({});
+  final TextEditingController textEditingController;
+
+  const NotesBody({this.textEditingController});
 
   @override
   Widget build(BuildContext context) {
     return TextField(
+      controller: textEditingController,
       style: bTextStyle,
       maxLines: 1000,
       keyboardType: TextInputType.multiline,
       textCapitalization: TextCapitalization.sentences,
       cursorColor: Colors.black,
-      decoration: InputDecoration.collapsed(
-          hintText: 'Enter your notes here..'
-      ),
+      decoration:
+          InputDecoration.collapsed(hintText: 'Enter your notes here..'),
     );
   }
 }
 
 class HeaderBody extends StatelessWidget {
-  //const HeaderBody({});
+  final TextEditingController textEditingController;
+
+  const HeaderBody({this.textEditingController});
 
   @override
   Widget build(BuildContext context) {
     return TextField(
+      controller: textEditingController,
       style: hTextStyle,
       maxLines: 1,
       cursorColor: Colors.black,
-        textCapitalization: TextCapitalization.words,
-      decoration: InputDecoration.collapsed(
-          hintText: 'Input Title'
-      ),
+      textCapitalization: TextCapitalization.words,
+      decoration: InputDecoration.collapsed(hintText: 'Input Title'),
     );
   }
 }
-

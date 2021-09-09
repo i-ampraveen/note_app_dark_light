@@ -1,11 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:note_taking_app/constants/buttons_and_icons_misc(classes).dart';
+import 'package:note_taking_app/db/db_operations.dart';
+import 'package:note_taking_app/db/model_notes.dart';
+import 'package:sqflite/sqflite.dart';
 
 import 'main_screen.dart';
 
 final bodyController = TextEditingController();
 final headerController = TextEditingController();
+final dbHelper = DatabaseHelper.instance;
 
 class AddingNotes extends StatefulWidget {
   @override
@@ -48,10 +52,19 @@ class _AddingNotesState extends State<AddingNotes> {
           ),
           ActionsIconButton(
             icon: Icon(save, color: black),
-            callBack: () {
+            callBack: () async {
               debugPrint(bodyController.text);
               debugPrint(headerController.text);
               getHeaderDataToMainScreen(context);
+              //insertNote(note);
+              String title = headerController.text;
+              String body =  bodyController.text;
+              //dbHelper.insert(title, body);
+              //_insert(title, body);
+              Note note = Note(20, title, body);
+
+              var value = await dbHelper.insert(note);
+              print("if 1 is return then insert success and 0 then not inserted : $value");
             },
           )
         ],
@@ -90,3 +103,5 @@ getHeaderDataToMainScreen(BuildContext context){
       )
   );
 }
+
+

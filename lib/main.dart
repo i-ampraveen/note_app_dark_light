@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:note_taking_app/ui/main_screen.dart';
-import 'package:path/path.dart';
-import 'package:sqflite/sqflite.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -17,3 +15,7 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
+
+
+

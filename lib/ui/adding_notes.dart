@@ -19,6 +19,13 @@ class AddingNotes extends StatefulWidget {
 class _AddingNotesState extends State<AddingNotes> {
 
   @override
+  void initState() {
+    super.initState();
+    bodyController.clear();
+    headerController.clear();
+  }
+
+  @override
   void dispose() {
     //bodyController.dispose();
     //headerController.dispose();
@@ -55,7 +62,7 @@ class _AddingNotesState extends State<AddingNotes> {
             callBack: () async {
               debugPrint(bodyController.text);
               debugPrint(headerController.text);
-              getHeaderDataToMainScreen(context);
+              //getHeaderDataToMainScreen(context);
               //insertNote(note);
               String title = headerController.text;
               String body =  bodyController.text;
@@ -65,6 +72,8 @@ class _AddingNotesState extends State<AddingNotes> {
 
               var value = await dbHelper.insert(note);
               print("if 1 is return then insert success and 0 then not inserted : $value");
+
+              Navigator.pop(context);
             },
           )
         ],
@@ -94,14 +103,19 @@ class _AddingNotesState extends State<AddingNotes> {
   }
 }
 
-getHeaderDataToMainScreen(BuildContext context){
-  Navigator.push(context,
-      MaterialPageRoute(
-        builder: (context) => MainScreen(
-          heading : headerController.text,
-        )
-      )
-  );
-}
+// getHeaderDataToMainScreen(BuildContext context){
+//   Navigator.push(context,
+//       MaterialPageRoute(
+//         builder: (context) => MainScreen(
+//           heading : headerController.text,
+//         )
+//       )
+//   );
+// }
+// getHeaderDataToMainScreen(BuildContext context){
+//   Navigator.pop(context);
+// }
+
+
 
 

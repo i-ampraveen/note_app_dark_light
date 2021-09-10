@@ -21,10 +21,10 @@ class Note {
     };
   }
 
-  // @override
-  // String toString(){
-  //   return 'Note{id : $id, title : $title, body : $body}';
-  // }
+  @override
+  String toString(){
+    return 'Note{title : $title, body : $body}';
+  }
 }
 
 

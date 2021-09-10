@@ -23,12 +23,12 @@ class DatabaseHelper {
   Future<Database> get database async {
     if (_database != null) return _database;
     // lazily instantiate the db the first time it is accessed
-    _database = await _initDatabase();
+    _database = await initDatabase();
     return _database;
   }
 
   // this opens the database (and creates it if it doesn't exist)
-  _initDatabase() async {
+  initDatabase() async {
     String path = join(await getDatabasesPath(), _databaseName);
     return await openDatabase(path,
         version: _databaseVersion,
@@ -53,41 +53,84 @@ class DatabaseHelper {
   // inserted row.
   Future<int> insert(Note note) async {
     Database db = await instance.database;
+    if (note.title.trim().isEmpty) note.title = 'Untitled Note';
     return await db.insert(table, {'title': note.title, 'body': note.body});
   }
+  //
+  // // All of the rows are returned as a list of maps, where each map is
+  // // a key-value list of columns.
+  // Future<List<Map<String, dynamic>>> queryAllRows() async {
+  //   Database db = await instance.database;
+  //   var queryResult = await db.query(table);
+  //   return queryResult;
+  // }
+  //
+  // // Queries rows based on the argument received
+  // Future<List<Map<String, dynamic>>> queryRows(title) async {
+  //   Database db = await instance.database;
+  //   return await db.query(table, where: "$columnTitle LIKE '%$title%'");
+  // }
+  //
+  // // All of the methods (insert, query, update, delete) can also be done using
+  // // raw SQL commands. This method uses a raw query to give the row count.
+  // Future<int> queryRowCount() async {
+  //   Database db = await instance.database;
+  //   return Sqflite.firstIntValue(await db.rawQuery('SELECT COUNT(*) FROM $table'));
+  // }
+  //
+  // // We are assuming here that the id column in the map is set. The other
+  // // column values will be used to update the row.
+  // Future<int> update(Note note) async {
+  //   Database db = await instance.database;
+  //   int id = note.toMap()['id'];
+  //   return await db.update(table, note.toMap(), where: '$columnId = ?', whereArgs: [id]);
+  // }
+  //
+  // // Deletes the row specified by the id. The number of affected rows is
+  // // returned. This should be 1 as long as the row exists.
+  // Future<int> delete(int id) async {
+  //   Database db = await instance.database;
+  //   return await db.delete(table, where: '$columnId = ?', whereArgs: [id]);
+  // }
 
-  // All of the rows are returned as a list of maps, where each map is
-  // a key-value list of columns.
-  Future<List<Map<String, dynamic>>> queryAllRows() async {
-    Database db = await instance.database;
-    return await db.query(table);
+  // //get Map list from db, convert to Notes List object
+  // Future<List<Note>> getNoteList() async {
+  //   //get map list and # of entries in db
+  //   var noteMapList = await queryAllRows();
+  //   int count = noteMapList.length;
+  //
+  //   List<Note> noteList = List<Note>();
+  //   //Loop to create exercise list from a map list
+  //   for (int i = 0; i < count; i++) {
+  //     noteList.add(Note.fromMap(noteMapList[i]));
+  //   }
+  //   return noteList;
+  // }
+
+  Future<List<Note>> getNotesFromDB() async {
+    final db = await database;
+    List<Note> notesList = [];
+    List<Map> maps = await db.query(table);
+    // await db.query('notes_table',
+    //     columns: ['id', 'title', 'body']);
+    if (maps.length > 0) {
+      maps.forEach((map) {
+        notesList.add(Note.fromMap(map));
+      });
+    }
+    return notesList;
   }
 
-  // Queries rows based on the argument received
-  Future<List<Map<String, dynamic>>> queryRows(title) async {
-    Database db = await instance.database;
-    return await db.query(table, where: "$columnTitle LIKE '%$title%'");
-  }
+// Future<Note> addNoteIntoDB(Note newNote) async {
+//     final db = await instance.database;
+//     if (newNote.title.trim().isEmpty) newNote.title = 'Untitled Note';
+//     int id = await db.transaction((transaction){
+//       transaction.rawInsert(
+//         'INSERT into notes_table(title, body) VALUES ("${newNote.title}", "${newNote.body}");');
+//     });
+//     newNote.id = id;
+//     return newNote;
+// }
 
-  // All of the methods (insert, query, update, delete) can also be done using
-  // raw SQL commands. This method uses a raw query to give the row count.
-  Future<int> queryRowCount() async {
-    Database db = await instance.database;
-    return Sqflite.firstIntValue(await db.rawQuery('SELECT COUNT(*) FROM $table'));
-  }
-
-  // We are assuming here that the id column in the map is set. The other
-  // column values will be used to update the row.
-  Future<int> update(Note note) async {
-    Database db = await instance.database;
-    int id = note.toMap()['id'];
-    return await db.update(table, note.toMap(), where: '$columnId = ?', whereArgs: [id]);
-  }
-
-  // Deletes the row specified by the id. The number of affected rows is
-  // returned. This should be 1 as long as the row exists.
-  Future<int> delete(int id) async {
-    Database db = await instance.database;
-    return await db.delete(table, where: '$columnId = ?', whereArgs: [id]);
-  }
 }
+

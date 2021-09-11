@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:note_taking_app/constants/text_and_decorations(methods).dart';
 import 'package:note_taking_app/db/model_notes.dart';
 import 'package:note_taking_app/ui/adding_notes.dart';
-import 'package:note_taking_app/db/db_operations.dart';
+
 
 class MainScreen extends StatefulWidget {
   final heading;
@@ -20,18 +20,17 @@ class _MainScreenState extends State<MainScreen> {
   @override
   void initState() {
     super.initState();
-    //DatabaseHelper.instance.initDatabase();
     dbHelper.initDatabase();
     setNotesFromDB();
   }
 
   setNotesFromDB() async{
-    print("Entered setNotes");
+    print("Entered setNotes in main page");
     var fetchedNotes = await dbHelper.getNotesFromDB();
     setState(() {
       noteList = fetchedNotes;
     });
-}
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +38,6 @@ class _MainScreenState extends State<MainScreen> {
       appBar: AppBar(
         elevation: 0,
         title: titleText,
-        backwardsCompatibility: false,
         automaticallyImplyLeading: false,
         backgroundColor: Colors.white.withOpacity(0.4),
       ),
@@ -49,8 +47,7 @@ class _MainScreenState extends State<MainScreen> {
         child: FittedBox(
           child: FloatingActionButton(
             onPressed: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => AddingNotes()));
+              gotoAddingNotesPage(context);
             },
             child: const Icon(
               Icons.add,
@@ -59,20 +56,6 @@ class _MainScreenState extends State<MainScreen> {
           ),
         ),
       ),
-      // body: Container(
-      //   color: Colors.white.withOpacity(0.4),
-      //   child: Padding(
-      //     padding: const EdgeInsets.fromLTRB(18, 18, 0, 0),
-      //     child: Column(
-      //       children: [
-      //         Text(
-      //           widget.heading,
-      //         style: hListTextStyle,
-      //         ),
-      //       ],
-      //     ),
-      //   ),
-      // ),
       body: ListView.builder(
         itemCount: noteList.length,
         itemBuilder: (context, index){
@@ -81,7 +64,15 @@ class _MainScreenState extends State<MainScreen> {
           );
         },
       ),
-
     );
   }
+  gotoAddingNotesPage(BuildContext context){
+    Navigator.push(
+      context, MaterialPageRoute(builder: (context) => AddingNotes()),).then(
+            (value) => setState(() {
+              setNotesFromDB();
+            }));
+  }
 }
+
+

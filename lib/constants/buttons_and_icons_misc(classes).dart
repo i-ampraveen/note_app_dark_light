@@ -74,3 +74,63 @@ class HeaderBody extends StatelessWidget {
     );
   }
 }
+
+class TileCard extends StatelessWidget {
+  final String titleText;
+  final String dateText;
+
+  const TileCard({@required this.titleText, @required this.dateText});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 90,
+      child: Card(
+        shape:
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),
+        elevation: 0,
+        margin: const EdgeInsets.all(8.0),
+        child: ListTile(
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),
+          title: Text(
+            titleText,
+            style: TextStyle(fontWeight: FontWeight.w700),
+          ),
+          tileColor: Colors.grey.withOpacity(0.2),
+          subtitle: Padding(
+            padding: EdgeInsets.only(top: 10.0),
+            child: Text(dateText),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class FAB extends StatelessWidget {
+
+  final Function whatToDo;
+
+  const FAB({@required this.whatToDo});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 80.0,
+      width: 80.0,
+      child: FittedBox(
+        child: FloatingActionButton(
+          onPressed: whatToDo,
+          child: const Icon(
+            Icons.add,
+          ),
+          backgroundColor: Colors.green,
+        ),
+      ),
+    );
+  }
+}
+
+
+

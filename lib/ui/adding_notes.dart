@@ -3,9 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:note_taking_app/constants/buttons_and_icons_misc(classes).dart';
 import 'package:note_taking_app/db/db_operations.dart';
 import 'package:note_taking_app/db/model_notes.dart';
-import 'package:sqflite/sqflite.dart';
 
-import 'main_screen.dart';
 
 final bodyController = TextEditingController();
 final headerController = TextEditingController();
@@ -17,15 +15,12 @@ class AddingNotes extends StatefulWidget {
 }
 
 class _AddingNotesState extends State<AddingNotes> {
-
-
   @override
   void initState() {
     super.initState();
     bodyController.clear();
     headerController.clear();
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -55,10 +50,8 @@ class _AddingNotesState extends State<AddingNotes> {
           ActionsIconButton(
             icon: Icon(save, color: black),
             callBack: () async {
-              debugPrint(bodyController.text);
-              debugPrint(headerController.text);
               String title = headerController.text;
-              String body =  bodyController.text;
+              String body = bodyController.text;
               Note note = Note(20, title, body);
 
               var value = await dbHelper.insert(note);
@@ -93,8 +86,3 @@ class _AddingNotesState extends State<AddingNotes> {
     );
   }
 }
-
-
-
-
-

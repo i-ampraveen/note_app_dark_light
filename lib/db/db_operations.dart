@@ -4,7 +4,6 @@ import 'package:sqflite/sqflite.dart';
 import 'model_notes.dart';
 
 class DatabaseHelper {
-
   static final _databaseName = "myNote.db";
   static final _databaseVersion = 1;
 
@@ -16,10 +15,12 @@ class DatabaseHelper {
 
   // make this a singleton class
   DatabaseHelper._privateConstructor();
+
   static final DatabaseHelper instance = DatabaseHelper._privateConstructor();
 
   // only have a single app-wide reference to the database
   static Database _database;
+
   Future<Database> get database async {
     if (_database != null) return _database;
     // lazily instantiate the db the first time it is accessed
@@ -31,8 +32,7 @@ class DatabaseHelper {
   initDatabase() async {
     String path = join(await getDatabasesPath(), _databaseName);
     return await openDatabase(path,
-        version: _databaseVersion,
-        onCreate: _onCreate);
+        version: _databaseVersion, onCreate: _onCreate);
   }
 
   // SQL code to create the database table
@@ -56,6 +56,7 @@ class DatabaseHelper {
     if (note.title.trim().isEmpty) note.title = 'Untitled Note';
     return await db.insert(table, {'title': note.title, 'body': note.body});
   }
+
   //
   // // All of the rows are returned as a list of maps, where each map is
   // // a key-value list of columns.
@@ -111,8 +112,6 @@ class DatabaseHelper {
     final db = await database;
     List<Note> notesList = [];
     List<Map> maps = await db.query(table);
-    // await db.query('notes_table',
-    //     columns: ['id', 'title', 'body']);
     if (maps.length > 0) {
       maps.forEach((map) {
         notesList.add(Note.fromMap(map));
@@ -133,4 +132,3 @@ class DatabaseHelper {
 // }
 
 }
-

@@ -28,3 +28,9 @@ TextStyle hEditPageTextStyle = TextStyle(
   color: Colors.black,
 );
 
+AppBar mainScreenAppBar = AppBar(
+  elevation: 0,
+  title: titleText,
+  automaticallyImplyLeading: false,
+  backgroundColor: Colors.white.withOpacity(0.4),
+);

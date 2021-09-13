@@ -12,6 +12,7 @@ class DatabaseHelper {
   static final columnId = 'id';
   static final columnTitle = 'title';
   static final columnBody = 'body';
+  static final columnDate = 'date';
 
   // make this a singleton class
   DatabaseHelper._privateConstructor();
@@ -41,7 +42,8 @@ class DatabaseHelper {
           CREATE TABLE $table (
             $columnId INTEGER PRIMARY KEY AUTOINCREMENT,
             $columnTitle TEXT NOT NULL,
-            $columnBody TEXT NOT NULL
+            $columnBody TEXT NOT NULL,
+            $columnDate TEXT NOT NULL
           )
           ''');
   }
@@ -54,7 +56,7 @@ class DatabaseHelper {
   Future<int> insert(Note note) async {
     Database db = await instance.database;
     if (note.title.trim().isEmpty) note.title = 'Untitled Note';
-    return await db.insert(table, {'title': note.title, 'body': note.body});
+    return await db.insert(table, {'title': note.title, 'body': note.body, 'date': note.date});
   }
 
   //

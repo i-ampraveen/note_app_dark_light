@@ -4,25 +4,28 @@ class Note {
   int id;
   String title;
   String body;
+  String date;
 
-  Note(this.id, this.title, this.body);
+  Note(this.id, this.title, this.body, this.date);
 
   Note.fromMap(Map<String, dynamic> map) {
     id = map['id'];
     title = map['title'];
     body = map['body'];
+    date = map['date'];
   }
 
   Map<String, dynamic> toMap() {
     return {
       DatabaseHelper.columnId: id,
       DatabaseHelper.columnTitle: title,
-      DatabaseHelper.columnBody: body
+      DatabaseHelper.columnBody: body,
+      DatabaseHelper.columnDate: date,
     };
   }
 
   @override
   String toString() {
-    return '$title';
+    return '$title, $date';
   }
 }

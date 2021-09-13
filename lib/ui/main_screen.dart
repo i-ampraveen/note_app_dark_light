@@ -14,7 +14,7 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> {
   List<Note> noteList = [];
 
-  String formattedDate = DateFormat.yMMMd('en_US').format(DateTime.now());
+  //String formattedDate = DateFormat.yMMMd('en_US').format(DateTime.now());
 
   @override
   void initState() {
@@ -45,8 +45,8 @@ class _MainScreenState extends State<MainScreen> {
           itemCount: noteList.length,
           itemBuilder: (context, index) {
             return TileCard(
-              titleText: ('${noteList[index]}'),
-              dateText: formattedDate,
+              titleText: ('${noteList[index].title}'),
+              dateText: ('${noteList[index].date}'),
             );
           },
         ),

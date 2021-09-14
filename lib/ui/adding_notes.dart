@@ -24,6 +24,10 @@ class _AddingNotesState extends State<AddingNotes> {
     headerController.clear();
   }
 
+  isTextEntered(){
+
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,16 +55,17 @@ class _AddingNotesState extends State<AddingNotes> {
           ),
           ActionsIconButton(
             icon: Icon(save, color: black),
-            callBack: () async {
+            callBack: (headerController.text != null && bodyController.text != null) ? () async {
               String title = headerController.text;
               String body = bodyController.text;
               Note note = Note(20, title, body, formattedDate);
+              //Note note = Note(20, headerController.text, bodyController.text, formattedDate);
 
               var value = await dbHelper.insert(note);
               print("if 1 is return then insert success and 0 then not inserted : $value");
 
               Navigator.pop(context);
-            },
+            } : null,
           )
         ],
       ),

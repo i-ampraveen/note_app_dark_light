@@ -78,8 +78,9 @@ class HeaderBody extends StatelessWidget {
 class TileCard extends StatelessWidget {
   final String titleText;
   final String dateText;
+  final Function whatToDoOnPressed;
 
-  const TileCard({@required this.titleText, @required this.dateText});
+  const TileCard({@required this.titleText, @required this.dateText, @required this.whatToDoOnPressed});
 
   @override
   Widget build(BuildContext context) {
@@ -91,6 +92,7 @@ class TileCard extends StatelessWidget {
         elevation: 0,
         margin: const EdgeInsets.all(8.0),
         child: ListTile(
+          onTap: whatToDoOnPressed,
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),
           title: Text(

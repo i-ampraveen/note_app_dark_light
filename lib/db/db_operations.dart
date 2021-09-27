@@ -68,11 +68,11 @@ class DatabaseHelper {
   //   return queryResult;
   // }
   //
-  // // Queries rows based on the argument received
-  // Future<List<Map<String, dynamic>>> queryRows(title) async {
-  //   Database db = await instance.database;
-  //   return await db.query(table, where: "$columnTitle LIKE '%$title%'");
-  // }
+  // Queries rows based on the argument received
+  Future<List<Map<String, dynamic>>> queryRows(id) async {
+    Database db = await instance.database;
+    return await db.query(table, where: "$columnId LIKE '%$id%'");
+  }
   //
   // // All of the methods (insert, query, update, delete) can also be done using
   // // raw SQL commands. This method uses a raw query to give the row count.
@@ -96,20 +96,6 @@ class DatabaseHelper {
   //   return await db.delete(table, where: '$columnId = ?', whereArgs: [id]);
   // }
 
-  // //get Map list from db, convert to Notes List object
-  // Future<List<Note>> getNoteList() async {
-  //   //get map list and # of entries in db
-  //   var noteMapList = await queryAllRows();
-  //   int count = noteMapList.length;
-  //
-  //   List<Note> noteList = List<Note>();
-  //   //Loop to create exercise list from a map list
-  //   for (int i = 0; i < count; i++) {
-  //     noteList.add(Note.fromMap(noteMapList[i]));
-  //   }
-  //   return noteList;
-  // }
-
   Future<List<Note>> getNotesFromDB() async {
     final db = await database;
     List<Note> notesList = [];
@@ -121,16 +107,4 @@ class DatabaseHelper {
     }
     return notesList;
   }
-
-// Future<Note> addNoteIntoDB(Note newNote) async {
-//     final db = await instance.database;
-//     if (newNote.title.trim().isEmpty) newNote.title = 'Untitled Note';
-//     int id = await db.transaction((transaction){
-//       transaction.rawInsert(
-//         'INSERT into notes_table(title, body) VALUES ("${newNote.title}", "${newNote.body}");');
-//     });
-//     newNote.id = id;
-//     return newNote;
-// }
-
 }

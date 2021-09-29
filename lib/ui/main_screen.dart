@@ -48,8 +48,15 @@ class _MainScreenState extends State<MainScreen> {
             return TileCard(
               titleText: ('${noteList[index].title}'),
               dateText: ('${noteList[index].date}'),
-              whatToDoOnPressed: (){
-                openUserClickedNote();
+              whatToDoOnPressed: () async {
+                //openUserClickedNote();
+                int getIDOfTheUserClickedNote = (noteList[index].id);
+                //var getNoteByID = await dbHelper.queryRows(getIDOfTheUserClickedNote);
+                debugPrint('before navigating to editing notes');
+                Navigator.of(context).push(
+                    MaterialPageRoute(
+                        builder: (context) => EditingNotes(getIDOfTheUserClickedNote)));
+                debugPrint('after navigating to editing notes');
                 debugPrint('${noteList[index].id}');
               },
             );
@@ -68,13 +75,14 @@ class _MainScreenState extends State<MainScreen> {
         }));
   }
 
-  openUserClickedNote() async {
-    int getIDOfTheUserClickedNote = int.parse('$noteList[index].id');
-    var getNoteByID = await dbHelper.queryRows(getIDOfTheUserClickedNote);
-    debugPrint('getIDOfTheUserClickedNote');
-    Navigator.of(context).push(
-        MaterialPageRoute(
-            builder: (context) => EditingNotes(getIDOfTheUserClickedNote)));
-  }
+  // openUserClickedNote() async {
+  //   int getIDOfTheUserClickedNote = (noteList[index].id);
+  //   //var getNoteByID = await dbHelper.queryRows(getIDOfTheUserClickedNote);
+  //   debugPrint('before navigating to editing notes');
+  //   Navigator.of(context).push(
+  //       MaterialPageRoute(
+  //           builder: (context) => EditingNotes(getIDOfTheUserClickedNote)));
+  //   debugPrint('after navigating to editing notes');
+  // }
 
 }

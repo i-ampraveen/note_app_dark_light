@@ -107,4 +107,19 @@ class DatabaseHelper {
     }
     return notesList;
   }
+
+  // Fetching Notes from ID
+  Future<List<Note>> fetchNotesFromID(id) async {
+    final db = await database;
+    List<Note> notesList = [];
+    List<Map> maps = await db.query(table, where: "$columnId LIKE '%$id%'");
+    if (maps.length > 0) {
+      maps.forEach((map) {
+        notesList.add(Note.fromMap(map));
+      });
+    }
+    return notesList;
+  }
+
 }
+

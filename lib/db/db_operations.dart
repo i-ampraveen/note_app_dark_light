@@ -81,13 +81,13 @@ class DatabaseHelper {
   //   return Sqflite.firstIntValue(await db.rawQuery('SELECT COUNT(*) FROM $table'));
   // }
   //
-  // // We are assuming here that the id column in the map is set. The other
-  // // column values will be used to update the row.
-  // Future<int> update(Note note) async {
-  //   Database db = await instance.database;
-  //   int id = note.toMap()['id'];
-  //   return await db.update(table, note.toMap(), where: '$columnId = ?', whereArgs: [id]);
-  // }
+  // We are assuming here that the id column in the map is set. The other
+  // column values will be used to update the row.
+  Future<int> update(Note note) async {
+    Database db = await instance.database;
+    int id = note.toMap()['id'];
+    return await db.update(table, note.toMap(), where: '$columnId = ?', whereArgs: [id]);
+  }
   //
   // // Deletes the row specified by the id. The number of affected rows is
   // // returned. This should be 1 as long as the row exists.
@@ -120,6 +120,13 @@ class DatabaseHelper {
     }
     return notesList;
   }
+
+  // updateNoteInDB(Note updatedNote) async {
+  //   final db = await database;
+  //   await db.update('Notes', updatedNote.toMap(),
+  //       where: '_id = ?', whereArgs: [updatedNote.id]);
+  //   print('Note updated: ${updatedNote.title} ${updatedNote.body}');
+  // }
 
 }
 

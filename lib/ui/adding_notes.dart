@@ -23,7 +23,6 @@ class _AddingNotesState extends State<AddingNotes> with ChangeNotifier {
     headerController.clear();
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -57,7 +56,8 @@ class _AddingNotesState extends State<AddingNotes> with ChangeNotifier {
               Note note = Note(20, title, body, formattedDate);
 
               var value = await dbHelper.insert(note);
-              print("if 1 is return then insert success and 0 then not inserted : $value");
+              print(
+                  "if 1 is return then insert success and 0 then not inserted : $value");
 
               Navigator.pop(context);
             },
@@ -88,5 +88,3 @@ class _AddingNotesState extends State<AddingNotes> with ChangeNotifier {
     );
   }
 }
-
-

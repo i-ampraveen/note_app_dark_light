@@ -40,7 +40,7 @@ class ActionsIconButton extends StatelessWidget {
 class NotesBody extends StatelessWidget {
   final TextEditingController textEditingController;
 
-  const NotesBody({this.textEditingController});
+  const NotesBody({@required this.textEditingController});
 
   @override
   Widget build(BuildContext context) {
@@ -60,7 +60,7 @@ class NotesBody extends StatelessWidget {
 class HeaderBody extends StatelessWidget {
   final TextEditingController textEditingController;
 
-  const HeaderBody({this.textEditingController});
+  const HeaderBody({@required this.textEditingController});
 
   @override
   Widget build(BuildContext context) {

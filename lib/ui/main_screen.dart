@@ -49,13 +49,18 @@ class _MainScreenState extends State<MainScreen> {
               titleText: ('${noteList[index].title}'),
               dateText: ('${noteList[index].date}'),
               whatToDoOnPressed: () async {
-                //openUserClickedNote();
                 int getIDOfTheUserClickedNote = (noteList[index].id);
-                //var getNoteByID = await dbHelper.queryRows(getIDOfTheUserClickedNote);
                 debugPrint('before navigating to editing notes');
-                Navigator.of(context).push(
-                    MaterialPageRoute(
-                        builder: (context) => EditingNotes(getIDOfTheUserClickedNote)));
+                Navigator.of(context)
+                    .push(
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            EditingNotes(getIDOfTheUserClickedNote),
+                      ),
+                    )
+                    .then((value) => setState(() {
+                          setNotesFromDB();
+                        }));
                 debugPrint('after navigating to editing notes');
                 debugPrint('${noteList[index].id}');
               },
@@ -69,20 +74,22 @@ class _MainScreenState extends State<MainScreen> {
   gotoAddingNotesPage(BuildContext context) {
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => AddingNotes()),
+      MaterialPageRoute(
+        builder: (context) => AddingNotes(),
+      ),
     ).then((value) => setState(() {
           setNotesFromDB();
         }));
   }
 
-  // openUserClickedNote() async {
-  //   int getIDOfTheUserClickedNote = (noteList[index].id);
-  //   //var getNoteByID = await dbHelper.queryRows(getIDOfTheUserClickedNote);
-  //   debugPrint('before navigating to editing notes');
-  //   Navigator.of(context).push(
-  //       MaterialPageRoute(
-  //           builder: (context) => EditingNotes(getIDOfTheUserClickedNote)));
-  //   debugPrint('after navigating to editing notes');
-  // }
+// openUserClickedNote() async {
+//   int getIDOfTheUserClickedNote = (noteList[index].id);
+//   //var getNoteByID = await dbHelper.queryRows(getIDOfTheUserClickedNote);
+//   debugPrint('before navigating to editing notes');
+//   Navigator.of(context).push(
+//       MaterialPageRoute(
+//           builder: (context) => EditingNotes(getIDOfTheUserClickedNote)));
+//   debugPrint('after navigating to editing notes');
+// }
 
 }

@@ -32,6 +32,12 @@ class _MainScreenState extends State<MainScreen> {
     });
   }
 
+  removeNotesFromDB(int id) async {
+    print("Removing notes in main page");
+    await dbHelper.delete(id);
+    setNotesFromDB();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -45,25 +51,35 @@ class _MainScreenState extends State<MainScreen> {
         child: ListView.builder(
           itemCount: noteList.length,
           itemBuilder: (context, index) {
-            return TileCard(
-              titleText: ('${noteList[index].title}'),
-              dateText: ('${noteList[index].date}'),
-              whatToDoOnPressed: () async {
-                int getIDOfTheUserClickedNote = (noteList[index].id);
-                debugPrint('before navigating to editing notes');
-                Navigator.of(context)
-                    .push(
-                      MaterialPageRoute(
-                        builder: (context) =>
-                            EditingNotes(getIDOfTheUserClickedNote),
-                      ),
-                    )
-                    .then((value) => setState(() {
-                          setNotesFromDB();
-                        }));
-                debugPrint('after navigating to editing notes');
-                debugPrint('${noteList[index].id}');
+            final note = noteList[index];
+            return Dismissible(
+              key: Key((note.id).toString()),
+              onDismissed: (direction){
+                setState(() {
+                  noteList.removeAt(index);
+                  removeNotesFromDB(note.id);
+                });
               },
+              child: TileCard(
+                titleText: ('${noteList[index].title}'),
+                dateText: ('${noteList[index].date}'),
+                whatToDoOnPressed: () async {
+                  int getIDOfTheUserClickedNote = (noteList[index].id);
+                  debugPrint('before navigating to editing notes');
+                  Navigator.of(context)
+                      .push(
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              EditingNotes(getIDOfTheUserClickedNote),
+                        ),
+                      )
+                      .then((value) => setState(() {
+                            setNotesFromDB();
+                          }));
+                  debugPrint('after navigating to editing notes');
+                  debugPrint('${noteList[index].id}');
+                },
+              ),
             );
           },
         ),
@@ -81,15 +97,4 @@ class _MainScreenState extends State<MainScreen> {
           setNotesFromDB();
         }));
   }
-
-// openUserClickedNote() async {
-//   int getIDOfTheUserClickedNote = (noteList[index].id);
-//   //var getNoteByID = await dbHelper.queryRows(getIDOfTheUserClickedNote);
-//   debugPrint('before navigating to editing notes');
-//   Navigator.of(context).push(
-//       MaterialPageRoute(
-//           builder: (context) => EditingNotes(getIDOfTheUserClickedNote)));
-//   debugPrint('after navigating to editing notes');
-// }
-
 }

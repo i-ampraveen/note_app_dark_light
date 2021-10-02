@@ -88,13 +88,13 @@ class DatabaseHelper {
     int id = note.toMap()['id'];
     return await db.update(table, note.toMap(), where: '$columnId = ?', whereArgs: [id]);
   }
-  //
-  // // Deletes the row specified by the id. The number of affected rows is
-  // // returned. This should be 1 as long as the row exists.
-  // Future<int> delete(int id) async {
-  //   Database db = await instance.database;
-  //   return await db.delete(table, where: '$columnId = ?', whereArgs: [id]);
-  // }
+
+  // Deletes the row specified by the id. The number of affected rows is
+  // returned. This should be 1 as long as the row exists.
+  Future<int> delete(int id) async {
+    Database db = await instance.database;
+    return await db.delete(table, where: '$columnId = ?', whereArgs: [id]);
+  }
 
   Future<List<Note>> getNotesFromDB() async {
     final db = await database;

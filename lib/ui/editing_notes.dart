@@ -12,7 +12,6 @@ String formattedDate = DateFormat.yMMMd('en_US').format(DateTime.now());
 
 class EditingNotes extends StatefulWidget {
   final int getIDOfTheUserClickedNote;
-
   EditingNotes(this.getIDOfTheUserClickedNote);
 
   @override

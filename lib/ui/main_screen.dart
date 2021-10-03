@@ -54,12 +54,28 @@ class _MainScreenState extends State<MainScreen> {
             final note = noteList[index];
             return Dismissible(
               key: Key((note.id).toString()),
-              onDismissed: (direction){
+              direction: DismissDirection.endToStart,
+              onDismissed: (direction) {
                 setState(() {
                   noteList.removeAt(index);
                   removeNotesFromDB(note.id);
                 });
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text("Note deleted"),
+                    action: SnackBarAction(
+                      label: "UNDO",
+                      onPressed: () {
+                        setState(() {
+                            noteList.insert(index, note);
+                            dbHelper.insert(note);
+                        });
+                      },
+                    ),
+                  ),
+                );
               },
+              background: Delete(),
               child: TileCard(
                 titleText: ('${noteList[index].title}'),
                 dateText: ('${noteList[index].date}'),

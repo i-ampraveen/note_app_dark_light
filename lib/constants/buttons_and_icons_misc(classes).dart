@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/painting.dart';
 import 'package:note_taking_app/constants/text_and_decorations(methods).dart';
 
 const undo = Icons.undo_rounded;
@@ -133,6 +134,25 @@ class FAB extends StatelessWidget {
     );
   }
 }
+
+class Delete extends StatelessWidget {
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: Colors.red.withOpacity(0.9),
+      alignment: Alignment.centerRight,
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Icon(
+          Icons.delete,
+          color: Colors.black,
+        ),
+      ),
+    );
+  }
+}
+
 
 
 

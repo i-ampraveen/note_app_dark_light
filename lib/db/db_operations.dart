@@ -96,6 +96,12 @@ class DatabaseHelper {
     return await db.delete(table, where: '$columnId = ?', whereArgs: [id]);
   }
 
+  deleteNoteInDB(Note noteToDelete) async {
+    final db = await database;
+    await db.delete('Notes', where: '_id = ?', whereArgs: [noteToDelete.id]);
+    print('Note deleted');
+  }
+
   Future<List<Note>> getNotesFromDB() async {
     final db = await database;
     List<Note> notesList = [];

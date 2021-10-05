@@ -4,11 +4,22 @@ import 'package:intl/intl.dart';
 import 'package:note_taking_app/constants/buttons_and_icons_misc(classes).dart';
 import 'package:note_taking_app/db/db_operations.dart';
 import 'package:note_taking_app/db/model_notes.dart';
+import 'package:path/path.dart';
+
+import 'adding_notes.dart';
 
 final dbHelperInEditingNote = DatabaseHelper.instance;
 TextEditingController titleController;
 TextEditingController bodyController;
 String formattedDate = DateFormat.yMMMd('en_US').format(DateTime.now());
+Note currentNote;
+
+removeNotesFromDB(int id) async {
+  print("Removing notes in main page");
+  await dbHelper.delete(id);
+  //setNotesFromDB();
+}
+
 
 class EditingNotes extends StatefulWidget {
   final int getIDOfTheUserClickedNote;
@@ -20,6 +31,7 @@ class EditingNotes extends StatefulWidget {
 
 class _EditingNotesState extends State<EditingNotes> {
   List<Note> fetchedNotes = [];
+  List<Note> noteList = [];
 
   @override
   void initState() {
@@ -36,6 +48,14 @@ class _EditingNotesState extends State<EditingNotes> {
     bodyController = TextEditingController(text: queriedNotes[0].body);
     setState(() {
       fetchedNotes = queriedNotes;
+    });
+  }
+
+  setNotesFromDB() async {
+    print("Entered setNotes in main page");
+    var fetchedNotes = await dbHelper.getNotesFromDB();
+    setState(() {
+      noteList = fetchedNotes;
     });
   }
 
@@ -64,7 +84,13 @@ class _EditingNotesState extends State<EditingNotes> {
 
               Navigator.pop(context);
             },
-          )
+          ),
+          ActionsIconButton(
+            icon: Icon(delete, color: black),
+            callBack: () {
+              handleDelete(context);
+            },
+          ),
         ],
       ),
       body: SafeArea(
@@ -93,3 +119,44 @@ class _EditingNotesState extends State<EditingNotes> {
     );
   }
 }
+
+void handleDelete(BuildContext context) async {
+    showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(8)),
+            title: Text('Delete Note'),
+            content: Text('This note will be deleted permanently'),
+            actions: <Widget>[
+              FlatButton(
+                child: Text('DELETE',
+                    style: TextStyle(
+                        color: Colors.red.shade300,
+                        fontWeight: FontWeight.w500,
+                        letterSpacing: 1)),
+                onPressed: () async {
+                  await dbHelperInEditingNote.deleteNoteInDB(currentNote);
+                  debugPrint('Note deleted');
+                  Navigator.pop(context);
+                  Navigator.pop(context);
+                },
+              ),
+              FlatButton(
+                child: Text('CANCEL',
+                    style: TextStyle(
+                        color: Theme.of(context).primaryColor,
+                        fontWeight: FontWeight.w500,
+                        letterSpacing: 1)),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+              )
+            ],
+          );
+        });
+}
+
+

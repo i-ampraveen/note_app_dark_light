@@ -4,7 +4,7 @@ import 'package:flutter/painting.dart';
 import 'package:note_taking_app/constants/text_and_decorations(methods).dart';
 
 const undo = Icons.undo_rounded;
-const redo = Icons.redo_rounded;
+const delete = Icons.delete_rounded;
 const save = Icons.check_rounded;
 
 const black = Colors.black;
@@ -152,6 +152,7 @@ class Delete extends StatelessWidget {
     );
   }
 }
+
 
 
 

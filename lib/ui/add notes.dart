@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:note_taking_app/constants/buttons_and_icons_misc(classes).dart';
+import 'package:note_taking_app/constants/classes.dart';
 import 'package:note_taking_app/db/db_operations.dart';
 import 'package:note_taking_app/db/model_notes.dart';
 
@@ -15,12 +15,19 @@ class AddingNotes extends StatefulWidget {
   _AddingNotesState createState() => _AddingNotesState();
 }
 
-class _AddingNotesState extends State<AddingNotes> with ChangeNotifier {
+class _AddingNotesState extends State<AddingNotes> {
   @override
   void initState() {
     super.initState();
     bodyController.clear();
     headerController.clear();
+  }
+
+  @override
+  void dispose() {
+    bodyController.dispose();
+    headerController.dispose();
+    super.dispose();
   }
 
   @override

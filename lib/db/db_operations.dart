@@ -56,7 +56,8 @@ class DatabaseHelper {
   Future<int> insert(Note note) async {
     Database db = await instance.database;
     if (note.title.trim().isEmpty) note.title = 'Untitled Note';
-    return await db.insert(table, {'title': note.title, 'body': note.body, 'date': note.date});
+    return await db.insert(
+        table, {'title': note.title, 'body': note.body, 'date': note.date});
   }
 
   // Queries rows based on the argument received
@@ -70,7 +71,8 @@ class DatabaseHelper {
   Future<int> update(Note note) async {
     Database db = await instance.database;
     int id = note.toMap()['id'];
-    return await db.update(table, note.toMap(), where: '$columnId = ?', whereArgs: [id]);
+    return await db
+        .update(table, note.toMap(), where: '$columnId = ?', whereArgs: [id]);
   }
 
   // Deletes the row specified by the id. The number of affected rows is
@@ -104,13 +106,4 @@ class DatabaseHelper {
     }
     return notesList;
   }
-
-  // updateNoteInDB(Note updatedNote) async {
-  //   final db = await database;
-  //   await db.update('Notes', updatedNote.toMap(),
-  //       where: '_id = ?', whereArgs: [updatedNote.id]);
-  //   print('Note updated: ${updatedNote.title} ${updatedNote.body}');
-  // }
-
 }
-

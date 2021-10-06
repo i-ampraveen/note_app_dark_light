@@ -1,12 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:note_taking_app/constants/buttons_and_icons_misc(classes).dart';
+import 'package:note_taking_app/constants/classes.dart';
+import 'package:note_taking_app/constants/methods.dart';
 import 'package:note_taking_app/db/db_operations.dart';
 import 'package:note_taking_app/db/model_notes.dart';
 import 'package:path/path.dart';
 
-import 'adding_notes.dart';
+import 'add notes.dart';
 
 final dbHelperInEditingNote = DatabaseHelper.instance;
 TextEditingController titleController;
@@ -20,9 +21,9 @@ removeNotesFromDB(int id) async {
   //setNotesFromDB();
 }
 
-
 class EditingNotes extends StatefulWidget {
   final int getIDOfTheUserClickedNote;
+
   EditingNotes(this.getIDOfTheUserClickedNote);
 
   @override
@@ -77,10 +78,12 @@ class _EditingNotesState extends State<EditingNotes> {
             callBack: () async {
               String title = titleController.text;
               String body = bodyController.text;
-              Note note = Note(widget.getIDOfTheUserClickedNote, title, body, formattedDate);
+              Note note = Note(
+                  widget.getIDOfTheUserClickedNote, title, body, formattedDate);
 
               var value = await dbHelperInEditingNote.update(note);
-              print("if 1 is return then edited success and 0 then not edited : $value");
+              print(
+                  "if 1 is return then edited success and 0 then not edited : $value");
 
               Navigator.pop(context);
             },
@@ -120,45 +123,3 @@ class _EditingNotesState extends State<EditingNotes> {
     );
   }
 }
-
-void handleDelete(BuildContext context, int id) async {
-    showDialog(
-        context: context,
-        barrierDismissible: false,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(8)),
-            title: Text('Delete Note'),
-            content: Text('This note will be deleted permanently'),
-            actions: <Widget>[
-              TextButton(
-                child: Text('DELETE',
-                    style: TextStyle(
-                        color: Colors.red.shade300,
-                        fontWeight: FontWeight.w500,
-                        letterSpacing: 1)),
-                onPressed: () async {
-                  await dbHelperInEditingNote.delete(id);
-                  debugPrint('Note deleted');
-                  //Navigator.pop(context);
-                  //Navigator.pop(context);
-                  Navigator.popUntil(context, ModalRoute.withName(Navigator.defaultRouteName));
-                },
-              ),
-              TextButton(
-                child: Text('CANCEL',
-                    style: TextStyle(
-                        color: Theme.of(context).primaryColor,
-                        fontWeight: FontWeight.w500,
-                        letterSpacing: 1)),
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-              )
-            ],
-          );
-        });
-}
-
-

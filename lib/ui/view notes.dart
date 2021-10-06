@@ -1,12 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:note_taking_app/constants/buttons_and_icons_misc(classes).dart';
-import 'package:note_taking_app/constants/text_and_decorations(methods).dart';
+import 'package:note_taking_app/constants/classes.dart';
+import 'package:note_taking_app/constants/methods.dart';
 import 'package:note_taking_app/db/model_notes.dart';
-import 'package:note_taking_app/ui/adding_notes.dart';
+import 'package:note_taking_app/ui/add notes.dart';
 import 'package:toast/toast.dart';
 
-import 'editing_notes.dart';
+import 'edit notes.dart';
 
 class MainScreen extends StatefulWidget {
   @override
@@ -15,8 +15,6 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
   List<Note> noteList = [];
-
-  //String formattedDate = DateFormat.yMMMd('en_US').format(DateTime.now());
 
   @override
   void initState() {
@@ -68,11 +66,14 @@ class _MainScreenState extends State<MainScreen> {
                       label: "UNDO",
                       onPressed: () {
                         setState(() {
-                            //noteList.insert(index, note);
-                            dbHelper.insert(note);
-                            setNotesFromDB();
+                          dbHelper.insert(note);
+                          setNotesFromDB();
                         });
-                        Toast.show("Restored note is available at the end of the list", context, duration: Toast.LENGTH_LONG, gravity:  Toast.BOTTOM);
+                        Toast.show(
+                            "Restored note is available at the end of the list",
+                            context,
+                            duration: Toast.LENGTH_LONG,
+                            gravity: Toast.BOTTOM);
                       },
                     ),
                   ),

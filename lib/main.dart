@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:note_taking_app/ui/main_screen.dart';
+import 'package:note_taking_app/ui/view notes.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -15,7 +15,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
-
-
-

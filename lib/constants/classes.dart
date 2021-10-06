@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
-import 'package:note_taking_app/constants/text_and_decorations(methods).dart';
+import 'package:note_taking_app/constants/methods.dart';
 
 const undo = Icons.undo_rounded;
 const delete = Icons.delete_rounded;
@@ -81,7 +81,10 @@ class TileCard extends StatelessWidget {
   final String dateText;
   final Function whatToDoOnPressed;
 
-  const TileCard({@required this.titleText, @required this.dateText, @required this.whatToDoOnPressed});
+  const TileCard(
+      {@required this.titleText,
+      @required this.dateText,
+      @required this.whatToDoOnPressed});
 
   @override
   Widget build(BuildContext context) {
@@ -112,7 +115,6 @@ class TileCard extends StatelessWidget {
 }
 
 class FAB extends StatelessWidget {
-
   final Function whatToDo;
 
   const FAB({@required this.whatToDo});
@@ -136,7 +138,6 @@ class FAB extends StatelessWidget {
 }
 
 class Delete extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -152,8 +153,3 @@ class Delete extends StatelessWidget {
     );
   }
 }
-
-
-
-
-

@@ -58,7 +58,7 @@ class DatabaseHelper {
     if (note.title.trim().isEmpty) note.title = 'Untitled Note';
     return await db.insert(table, {'title': note.title, 'body': note.body, 'date': note.date});
   }
-  
+
   // Queries rows based on the argument received
   Future<List<Map<String, dynamic>>> queryRows(id) async {
     Database db = await instance.database;
@@ -78,12 +78,6 @@ class DatabaseHelper {
   Future<int> delete(int id) async {
     Database db = await instance.database;
     return await db.delete(table, where: '$columnId = ?', whereArgs: [id]);
-  }
-
-  deleteNoteInDB(Note noteToDelete) async {
-    final db = await database;
-    await db.delete('Notes', where: '_id = ?', whereArgs: [noteToDelete.id]);
-    print('Note deleted');
   }
 
   Future<List<Note>> getNotesFromDB() async {

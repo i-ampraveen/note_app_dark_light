@@ -61,7 +61,6 @@ class _EditingNotesState extends State<EditingNotes> {
 
   @override
   Widget build(BuildContext context) {
-    int id = (fetchedNotes[0].id);
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
@@ -89,6 +88,7 @@ class _EditingNotesState extends State<EditingNotes> {
           ActionsIconButton(
             icon: Icon(delete, color: black),
             callBack: () {
+              int id = (fetchedNotes[0].id);
               handleDelete(context, id);
             },
           ),
@@ -132,21 +132,21 @@ void handleDelete(BuildContext context, int id) async {
             title: Text('Delete Note'),
             content: Text('This note will be deleted permanently'),
             actions: <Widget>[
-              FlatButton(
+              TextButton(
                 child: Text('DELETE',
                     style: TextStyle(
                         color: Colors.red.shade300,
                         fontWeight: FontWeight.w500,
                         letterSpacing: 1)),
                 onPressed: () async {
-                  //await dbHelperInEditingNote.deleteNoteInDB(currentNote);
                   await dbHelperInEditingNote.delete(id);
                   debugPrint('Note deleted');
-                  Navigator.pop(context);
-                  Navigator.pop(context);
+                  //Navigator.pop(context);
+                  //Navigator.pop(context);
+                  Navigator.popUntil(context, ModalRoute.withName(Navigator.defaultRouteName));
                 },
               ),
-              FlatButton(
+              TextButton(
                 child: Text('CANCEL',
                     style: TextStyle(
                         color: Theme.of(context).primaryColor,

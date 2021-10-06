@@ -58,29 +58,13 @@ class DatabaseHelper {
     if (note.title.trim().isEmpty) note.title = 'Untitled Note';
     return await db.insert(table, {'title': note.title, 'body': note.body, 'date': note.date});
   }
-
-  //
-  // // All of the rows are returned as a list of maps, where each map is
-  // // a key-value list of columns.
-  // Future<List<Map<String, dynamic>>> queryAllRows() async {
-  //   Database db = await instance.database;
-  //   var queryResult = await db.query(table);
-  //   return queryResult;
-  // }
-  //
+  
   // Queries rows based on the argument received
   Future<List<Map<String, dynamic>>> queryRows(id) async {
     Database db = await instance.database;
     return await db.query(table, where: "$columnId LIKE '%$id%'");
   }
-  //
-  // // All of the methods (insert, query, update, delete) can also be done using
-  // // raw SQL commands. This method uses a raw query to give the row count.
-  // Future<int> queryRowCount() async {
-  //   Database db = await instance.database;
-  //   return Sqflite.firstIntValue(await db.rawQuery('SELECT COUNT(*) FROM $table'));
-  // }
-  //
+
   // We are assuming here that the id column in the map is set. The other
   // column values will be used to update the row.
   Future<int> update(Note note) async {

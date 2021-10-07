@@ -13,7 +13,7 @@ TextStyle hMainTextStyle = TextStyle(
 );
 
 TextStyle bTextStyle = TextStyle(
-  fontSize: 20.0,
+  fontSize: 18.0,
   color: Colors.black,
 );
 
@@ -25,7 +25,7 @@ TextStyle hListTextStyle = TextStyle(
 
 TextStyle hEditPageTextStyle = TextStyle(
   fontWeight: FontWeight.bold,
-  fontSize: 25.0,
+  fontSize: 20.0,
   color: Colors.black,
 );
 

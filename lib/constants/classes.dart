@@ -122,8 +122,8 @@ class FAB extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 80.0,
-      width: 80.0,
+      height: 60.0,
+      width: 60.0,
       child: FittedBox(
         child: FloatingActionButton(
           onPressed: whatToDo,

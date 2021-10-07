@@ -7,7 +7,7 @@ Text titleText = Text(
 );
 
 TextStyle hMainTextStyle = TextStyle(
-  fontWeight: FontWeight.bold,
+  fontWeight: FontWeight.w900,
   fontSize: 25.0,
   color: Colors.black,
 );
@@ -17,14 +17,14 @@ TextStyle bTextStyle = TextStyle(
   color: Colors.black,
 );
 
-TextStyle hListTextStyle = TextStyle(
-  fontWeight: FontWeight.w500,
-  fontSize: 20.0,
-  color: Colors.black,
-);
+// TextStyle hListTextStyle = TextStyle(
+//   fontWeight: FontWeight.w600,
+//   fontSize: 18.0,
+//   color: Colors.black,
+// );
 
 TextStyle hEditPageTextStyle = TextStyle(
-  fontWeight: FontWeight.bold,
+  fontWeight: FontWeight.w600,
   fontSize: 20.0,
   color: Colors.black,
 );
@@ -52,7 +52,7 @@ void handleDelete(BuildContext context, int id) async {
               child: Text('DELETE',
                   style: TextStyle(
                       color: Colors.red.shade300,
-                      fontWeight: FontWeight.w500,
+                      fontWeight: FontWeight.w600,
                       letterSpacing: 1)),
               onPressed: () async {
                 await dbHelperInMethodClass.delete(id);
@@ -65,7 +65,7 @@ void handleDelete(BuildContext context, int id) async {
               child: Text('CANCEL',
                   style: TextStyle(
                       color: Theme.of(context).primaryColor,
-                      fontWeight: FontWeight.w500,
+                      fontWeight: FontWeight.w600,
                       letterSpacing: 1)),
               onPressed: () {
                 Navigator.pop(context);

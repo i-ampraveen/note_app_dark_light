@@ -70,7 +70,7 @@ class HeaderBody extends StatelessWidget {
       style: hEditPageTextStyle,
       maxLines: 1,
       cursorColor: Colors.black,
-      textCapitalization: TextCapitalization.words,
+      textCapitalization: TextCapitalization.sentences,
       decoration: InputDecoration.collapsed(hintText: 'Input Title'),
     );
   }
@@ -101,7 +101,7 @@ class TileCard extends StatelessWidget {
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),
           title: Text(
             titleText,
-            style: TextStyle(fontWeight: FontWeight.w700),
+            style: TextStyle(fontWeight: FontWeight.w600),
           ),
           tileColor: Colors.grey.withOpacity(0.2),
           subtitle: Padding(

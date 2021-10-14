@@ -1,4 +1,4 @@
-import 'db_operations.dart';
+import '../db/db_operations.dart';
 
 class Note {
   int id;

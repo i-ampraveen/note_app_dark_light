@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:note_taking_app/constants/classes.dart';
 import 'package:note_taking_app/db/db_operations.dart';
-import 'package:note_taking_app/db/model_notes.dart';
+import 'package:note_taking_app/utils/model_notes.dart';
 
 final bodyController = TextEditingController();
 final headerController = TextEditingController();

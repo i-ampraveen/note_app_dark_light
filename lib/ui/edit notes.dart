@@ -4,7 +4,7 @@ import 'package:intl/intl.dart';
 import 'package:note_taking_app/constants/classes.dart';
 import 'package:note_taking_app/constants/methods.dart';
 import 'package:note_taking_app/db/db_operations.dart';
-import 'package:note_taking_app/db/model_notes.dart';
+import 'package:note_taking_app/utils/model_notes.dart';
 import 'package:path/path.dart';
 
 import 'add notes.dart';

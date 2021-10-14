@@ -1,7 +1,7 @@
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
-import 'model_notes.dart';
+import '../utils/model_notes.dart';
 
 class DatabaseHelper {
   static final _databaseName = "myNote.db";

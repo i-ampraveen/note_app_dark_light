@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:note_taking_app/constants/classes.dart';
@@ -35,7 +34,6 @@ class _AddingNotesState extends State<AddingNotes> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        backwardsCompatibility: true,
         leading: LeadingIcon(
           callBack: () {
             Navigator.pop(context);

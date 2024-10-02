@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
 import 'package:note_taking_app/constants/methods.dart';
 
 const undo = Icons.undo_rounded;
@@ -10,9 +8,9 @@ const save = Icons.check_rounded;
 const black = Colors.black;
 
 class LeadingIcon extends StatelessWidget {
-  final Function callBack;
+  final VoidCallback callBack;
 
-  const LeadingIcon({@required this.callBack});
+  const LeadingIcon({required this.callBack});
 
   @override
   Widget build(BuildContext context) {
@@ -25,9 +23,9 @@ class LeadingIcon extends StatelessWidget {
 
 class ActionsIconButton extends StatelessWidget {
   final Icon icon;
-  final Function callBack;
+  final VoidCallback callBack;
 
-  const ActionsIconButton({@required this.icon, @required this.callBack});
+  const ActionsIconButton({required this.icon, required this.callBack});
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +39,7 @@ class ActionsIconButton extends StatelessWidget {
 class NotesBody extends StatelessWidget {
   final TextEditingController textEditingController;
 
-  const NotesBody({@required this.textEditingController});
+  const NotesBody({required this.textEditingController});
 
   @override
   Widget build(BuildContext context) {
@@ -61,7 +59,7 @@ class NotesBody extends StatelessWidget {
 class HeaderBody extends StatelessWidget {
   final TextEditingController textEditingController;
 
-  const HeaderBody({@required this.textEditingController});
+  const HeaderBody({required this.textEditingController});
 
   @override
   Widget build(BuildContext context) {
@@ -79,12 +77,12 @@ class HeaderBody extends StatelessWidget {
 class TileCard extends StatelessWidget {
   final String titleText;
   final String dateText;
-  final Function whatToDoOnPressed;
+  final VoidCallback whatToDoOnPressed;
 
   const TileCard(
-      {@required this.titleText,
-      @required this.dateText,
-      @required this.whatToDoOnPressed});
+      {required this.titleText,
+      required this.dateText,
+      required this.whatToDoOnPressed});
 
   @override
   Widget build(BuildContext context) {
@@ -115,9 +113,9 @@ class TileCard extends StatelessWidget {
 }
 
 class FAB extends StatelessWidget {
-  final Function whatToDo;
+  final VoidCallback whatToDo;
 
-  const FAB({@required this.whatToDo});
+  const FAB({required this.whatToDo});
 
   @override
   Widget build(BuildContext context) {

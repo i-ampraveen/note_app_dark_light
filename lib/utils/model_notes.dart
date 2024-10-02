@@ -1,10 +1,10 @@
 import '../db/db_operations.dart';
 
 class Note {
-  int id;
-  String title;
-  String body;
-  String date;
+  late int id;
+  late String title;
+  late String body;
+  late String date;
 
   Note(this.id, this.title, this.body, this.date);
 

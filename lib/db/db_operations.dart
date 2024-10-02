@@ -20,13 +20,14 @@ class DatabaseHelper {
   static final DatabaseHelper instance = DatabaseHelper._privateConstructor();
 
   // only have a single app-wide reference to the database
-  static Database _database;
+  static Database? _database;
 
   Future<Database> get database async {
-    if (_database != null) return _database;
+    if (_database != null) return _database!;
+    //return _database;
     // lazily instantiate the db the first time it is accessed
-    _database = await initDatabase();
-    return _database;
+     _database = await initDatabase();
+     return _database!;
   }
 
   // this opens the database (and creates it if it doesn't exist)
@@ -88,7 +89,7 @@ class DatabaseHelper {
     List<Map> maps = await db.query(table);
     if (maps.length > 0) {
       maps.forEach((map) {
-        notesList.add(Note.fromMap(map));
+        notesList.add(Note.fromMap(map as Map<String, dynamic>));
       });
     }
     return notesList;
@@ -101,7 +102,7 @@ class DatabaseHelper {
     List<Map> maps = await db.query(table, where: "$columnId LIKE '%$id%'");
     if (maps.length > 0) {
       maps.forEach((map) {
-        notesList.add(Note.fromMap(map));
+        notesList.add(Note.fromMap(map as Map<String, dynamic>));
       });
     }
     return notesList;

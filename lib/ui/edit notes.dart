@@ -1,19 +1,17 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:note_taking_app/constants/classes.dart';
 import 'package:note_taking_app/constants/methods.dart';
 import 'package:note_taking_app/db/db_operations.dart';
 import 'package:note_taking_app/utils/model_notes.dart';
-import 'package:path/path.dart';
 
 import 'add notes.dart';
 
 final dbHelperInEditingNote = DatabaseHelper.instance;
-TextEditingController titleController;
-TextEditingController bodyController;
+late TextEditingController titleController;
+late TextEditingController bodyController;
 String formattedDate = DateFormat.yMMMd('en_US').format(DateTime.now());
-Note currentNote;
+late Note currentNote;
 
 removeNotesFromDB(int id) async {
   print("Removing notes in main page");
@@ -65,7 +63,6 @@ class _EditingNotesState extends State<EditingNotes> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        backwardsCompatibility: true,
         leading: LeadingIcon(
           callBack: () {
             Navigator.pop(context);

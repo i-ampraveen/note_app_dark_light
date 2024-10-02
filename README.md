@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # note_taking_app
 
 Note taking app
@@ -14,3 +15,6 @@ A few resources to get you started if this is your first Flutter project:
 For help getting started with Flutter, view our
 [online documentation](https://flutter.dev/docs), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
+=======
+This is a basic Note taking app written in flutter.
+>>>>>>> 0dcc8149fe9e8a72943c59617541a73458da7086
